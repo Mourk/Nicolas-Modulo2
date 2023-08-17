@@ -9,7 +9,7 @@ class ObstacleManager:
 
     def update(self, game):
         if not self.obstacles:
-            self.obstacles.append(random.choice([Cactus(), Bird()]))
+            self.obstacles.append(random.choice([Cactus(), Bird()])) #Exibe os obstáculos de forma aleatória.
 
         for obstacle in self.obstacles:
             obstacle.update(game.game_speed, self.obstacles)

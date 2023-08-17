@@ -1,7 +1,5 @@
 import pygame
-
 from pygame.sprite import Sprite
-
 from dino_runner.utils.constants import RUNNING, JUMPING, DUCKING, DEFAULT_TYPE, SHIELD_TYPE, DUCKING_SHIELD, JUMPING_SHIELD, RUNNING_SHIELD
 
 DUCK_IMG = { DEFAULT_TYPE: DUCKING, SHIELD_TYPE: DUCKING_SHIELD}
@@ -24,11 +22,11 @@ class Dinosaur(Sprite):
        self.dino_jump = False
        self.dino_duck = False
        self.jump_vel = JUMP_VEL
-       self.fast_run = False
-       self.run_speed = 1
-       self.fast_run_speed = 2
+       self.fast_run = False #não aumentará a velocidade
+       self.run_speed = 1 # a velocidade vai ser 1, padrão
+       self.fast_run_speed = 2 #se apertar a tecla SPACE vai correr mais rápido
        self.revived = False
-       self.blink_count = 0
+       self.blink_count = 0 #Define que o número de piscadas é igual a 0
        self.setup_state()
 
     def revive(self):
@@ -66,7 +64,7 @@ class Dinosaur(Sprite):
         if self.step_index >= 9:
             self.step_index = 0
 
-        if user_input[pygame.K_SPACE]:
+        if user_input[pygame.K_SPACE]: #APÓS APERTAR A TECLA SPACE, O DINOSSAURO CORRERÁ MAIS RÁPIDO
             self.fast_run = True
             self.run_speed = self.fast_run_speed
         else:
@@ -78,8 +76,8 @@ class Dinosaur(Sprite):
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = X_POS
         self.dino_rect.y = Y_POS
-        self.step_index += self.run_speed
-
+        self.step_index += self.run_speed ### controla qual imagem da animação de corrida é exibida. 
+                                    #######Ele aumenta com base na self.run_speed, ou seja, quando o dinossauro está correndo ele passará correndo pelos obstáculos
     def jump(self):
         self.image = JUMP_IMG[self.type]
         if self.dino_jump:
@@ -100,10 +98,10 @@ class Dinosaur(Sprite):
 
     def draw(self, screen):
         screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y))
-        if not (self.revived and self.blink_count % 2 == 0):
+        if not (self.revived and self.blink_count % 2 == 0): #verificar se o número de vezes que piscar é igual a par.
             screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y))
         
-        if self.revived:
+        if self.revived: #se o número de vezes que piscar for maior que 10, o dinossauro para de piscar e renasce.
             self.blink_count += 1
             if self.blink_count > 10:
                 self.revived = False

@@ -63,7 +63,7 @@ class Game:
 
     def draw(self):
         self.clock.tick(FPS)
-        self.screen.fill((255, 0, 0))
+        self.screen.fill((255, 0, 0)) #################Altera a cor do background
         self.draw_background()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
