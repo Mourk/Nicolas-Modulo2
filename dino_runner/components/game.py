@@ -127,7 +127,7 @@ class Game:
                 pos_y_center = half_screen_width - 150
             )
             draw_message_component(
-                f"Death count: {self.death_count}",
+                f"Mortes: {self.death_count}",
                 self.screen,
                 pos_y_center = half_screen_height - 100
             )
